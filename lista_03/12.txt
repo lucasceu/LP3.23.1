@@ -1,0 +1,29 @@
+## Crie um modelo Ponto2D para representar um ponto no espaço cartesiano de duas
+## dimensões. Que dados e operações este modelo deve ter? Suponha um gráfico no qual
+## você tenha que desenhar pontos usando este modelo.
+
+modelo Ponto2D:
+    variáveis:
+        x: número real
+        y: número real
+    
+    operações:
+        construtor(x: número real, y: número real):
+            atribuir x a x
+            atribuir y a y
+        
+        getX():
+            retornar x
+        
+        getY():
+            retornar y
+        
+        setX(novoX: número real):
+            atribuir novoX a x
+        
+        setY(novoY: número real):
+            atribuir novoY a y
+        
+        mover(deltaX: número real, deltaY: número real):
+            adicionar deltaX a x
+            adicionar deltaY a y

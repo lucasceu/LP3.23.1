@@ -1,0 +1,11 @@
+## Considere o modelo ContaBancariaSimplificada e sua implementação, A operação abreConta permite que alguém crie uma conta bancária passando como
+## argumento um valor negativo, criando uma conta já em débito. Modifique a operação
+## abreConta abaixo para que se alguém passar um saldo inicial negativo, que este seja
+## considerado como zero.
+
+operacao abreConta(nome, saldoInicial)
+inicio
+    nomeDoCorrentista = nome;
+    saldo = saldoInicial <= 0 ? saldoInicial : 0.0;
+    contaEspecial = falso;
+fim

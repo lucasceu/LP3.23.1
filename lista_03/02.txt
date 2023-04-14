@@ -1,0 +1,29 @@
+## Imagine uma lâmpada que possa ter três estados: apagada, acesa e meia-luz. Usando
+## o modelo Lampada (Exercício 1) como base, escreva o modelo LampadaTresEstados.
+
+Classe LampadaTresEstados:
+   estado: inteiro
+   
+
+   método construtor():
+      estado = 0 // ao criar uma nova lâmpada, ela começa apagada
+   
+   método ligar():
+      se estado == 0:
+         estado = 2 // se a lâmpada estava apagada, passa para o estado de meia-luz
+      senão se estado == 2:
+         estado = 1 // se a lâmpada estava em meia-luz, passa para o estado de acesa
+   
+   método desligar():
+      se estado == 1:
+         estado = 2 // se a lâmpada estava acesa, passa para o estado de meia-luz
+      senão se estado == 2:
+         estado = 0 // se a lâmpada estava em meia-luz, passa para o estado apagada
+   
+   método getStatus():
+      se estado == 0:
+         retorne "Apagada"
+      senão se estado == 1:
+         retorne "Acesa"
+      senão:
+         retorne "Meia-luz"

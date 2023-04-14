@@ -1,0 +1,22 @@
+## Generalize o modelo LampadaTresEstados do exercício 2 para que ele possa
+## representar uma lâmpada onde a luminosidade pode ser ajustada com qualquer valor
+## entre 0% (apagada) e 100% (acessa).
+
+modelo LampadaTresEstados
+   atributo luminosidade : inteiro
+
+   operação ajustarLuminosidade(novaLuminosidade : inteiro)
+      se novaLuminosidade < 0 então
+         luminosidade <- 0
+      senão se novaLuminosidade > 100 então
+         luminosidade <- 100
+      senão
+         luminosidade <- novaLuminosidade
+      fim se
+   fim operação
+
+   operação estaAcesa() : booleano
+      retornar luminosidade > 0
+   fim operação
+
+fim modelo

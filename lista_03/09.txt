@@ -1,0 +1,11 @@
+## Crie um modelo Livro que represente os dados básicos de um livro sem se preocupar
+## com sua finalidade.
+
+Inicio
+    Modelo Livro
+    Titulo: string
+    Autor: string
+    Editora: string
+    AnoPublicacao: inteiro
+    Fim Modelo Livro
+Fim

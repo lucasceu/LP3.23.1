@@ -1,0 +1,16 @@
+## Partindo do resultado do Exercício 9, crie um modelo LivroDeLivraria que represente
+## os dados e operações básicas de um livro que está à venda em uma livraria.
+
+modelo LivroDeLivraria
+  titulo: string
+  autor: string
+  editora: string
+  anoPublicacao: inteiro
+  preco: float
+  quantidadeEstoque: inteiro
+  
+  operacao atualizaPreco(novoPreco: real)
+    preco = novoPreco
+  
+  operacao atualizaEstoque(novaQuantidade: inteiro)
+    quantidadeEstoque = novaQuantidade

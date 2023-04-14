@@ -1,0 +1,10 @@
+## Inclua no modelo Lampada (Exercício 1) uma operação estaLigada que retorne
+## verdadeiro se a lâmpada estiver ligada e falso caso contrário.
+
+funcao estaLigada() : booleano
+    se estado = "acesa" ou estado = "meia-luz" entao
+        retorne verdadeiro
+    senao
+        retorne falso
+    fim-se
+fim-funcao

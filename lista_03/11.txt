@@ -1,0 +1,48 @@
+## Partindo do resultado do Exercício 9, crie um modelo LivroDeBiblioteca que
+## represente os dados e operações básicas de um livro de uma biblioteca que pode ser
+## emprestado a leitores. Compare e comente as diferenças com o modelo anterior.
+
+-------- diferenças --------
+-> O modelo LivroDeBiblioteca tem informações específicas de uma biblioteca,
+-> como o status do livro (disponível ou emprestado) e as informações do empréstimo
+-> (nome do leitor, data de empréstimo e data de devolução). 
+-> As operações do LivroDeBiblioteca são mais complexas do que as do LivroDeLivraria,
+-> já que envolvem o controle do empréstimo e devolução do livro.
+-----------------------------
+
+modelo LivroDeBiblioteca:
+    // atributos
+    titulo: string
+    autor: string
+    editora: string
+    anoPublicacao: inteiro
+    numPaginas: inteiro
+    status: string
+    nomeDoLeitor: string
+    dataDeEmprestimo: data
+    dataDevolucao: data
+    
+    // operações
+    funcao emprestar(nomeDoLeitor, dataDeEmprestimo):
+        se status for igual a "disponivel" então
+            status = "emprestado"
+            nomeDoLeitor = nomeDoLeitor
+            dataDeEmprestimo = dataDeEmprestimo
+            dataDevolucao = null
+            retornar verdadeiro
+        senão
+            retornar falso
+    
+    funcao devolver(dataDevolucao):
+        se status for igual a "emprestado" então
+            status = "disponivel"
+            dataDevolucao = dataDevolucao
+            retornar verdadeiro
+        senão
+            retornar falso
+    
+    funcao estaDisponivel():
+        se status for igual a "disponivel" então
+            retornar verdadeiro
+        senão
+            retornar falso

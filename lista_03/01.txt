@@ -1,0 +1,16 @@
+## Projete e implemente um modelo para representar uma lâmpada a venda em um
+## supermercado. Que dados devem ser representados por este modelo? Que operações este
+## modelo deve realizar?
+
+Classe Lampada:
+    - atributos:
+        - estado: boolean
+        - potencia: int
+        - cor: string
+        
+    - métodos:
+        - ligar(): void
+        - desligar(): void
+        - trocarCor(cor: string): void
+        - getPotencia(): int
+        - setPotencia(potencia: int): void

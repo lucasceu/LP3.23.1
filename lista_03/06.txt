@@ -1,0 +1,13 @@
+
+
+operação abreConta(nome, saldoInicial, contaEspecial)
+inicio
+    nomeDoCorrentista = nome;
+    se saldoInicial < 0 e contaEspecial == falso entao
+        imprimir "ERRO: Saldo inicial negativo permitido apenas para conta especial!"
+        saldo = 0.00;
+    senao
+        saldo = saldoInicial;
+    fim_se
+    contaÉEspecial = contaEspecial;
+fim

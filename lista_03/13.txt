@@ -1,0 +1,18 @@
+## Crie um modelo para representar uma linha, criado pela união de dois pontos no
+## espaço cartesiano de duas dimensões, usando o modelo do Exercício 12. Que dados e
+## operações este modelo deve ter?
+
+modelo Linha2D
+    ponto1: Ponto2D
+    ponto2: Ponto2D
+    
+    operação definirPontos(p1, p2)
+        ponto1 = p1
+        ponto2 = p2
+    
+    operação comprimento()
+        deltaX = ponto2.x - ponto1.x
+        deltaY = ponto2.y - ponto1.y
+        comprimento = raizQuadrada(deltaX^2 + deltaY^2)
+        retorne comprimento
+fim do modelo
