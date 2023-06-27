@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Veiculo {
     private String marca;
     private String modelo;
@@ -5,6 +7,8 @@ public class Veiculo {
     private String placa;
     private boolean alugado;
     private String categoria;
+    private LocalDate dataInicioAluguel;
+    private LocalDate dataTerminoAluguel;
 
     public Veiculo(String marca, String modelo, int ano, String placa, boolean alugado, String categoria) {
         this.marca = marca;
@@ -63,14 +67,30 @@ public class Veiculo {
         this.categoria = categoria;
     }
 
-    //TO STRING RESUMIDO 
+    public LocalDate getDataInicioAluguel() {
+        return dataInicioAluguel;
+    }
+
+    public void setDataInicioAluguel(LocalDate dataInicioAluguel) {
+        this.dataInicioAluguel = dataInicioAluguel;
+    }
+
+    public LocalDate getDataTerminoAluguel() {
+        return dataTerminoAluguel;
+    }
+
+    public void setDataTerminoAluguel(LocalDate dataTerminoAluguel) {
+        this.dataTerminoAluguel = dataTerminoAluguel;
+    }
+
+    // TO STRING RESUMIDO
     @Override
     public String toString() {
-        return "Modelo: " + marca + " "+ modelo + ", Placa: " + placa + ", Ano: " + ano;
+        return "Modelo: " + marca + " " + modelo + ", Placa: " + placa + ", Ano: " + ano;
     }
-    
+
     /*
-    // TO STRING GERAL 
+    // TO STRING GERAL
     @Override
     public String toString() {
         return "Marca: " + marca + ", Modelo: " + modelo + ", Ano: " + ano + ", Placa: " + placa + ", Alugado: " + alugado;
