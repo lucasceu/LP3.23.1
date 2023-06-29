@@ -1,21 +1,17 @@
-public class Carro extends Veiculo {
+class Carro extends Veiculo {
     private int numPortas;
-
-    public Carro(String marca, String modelo, int ano, String placa, boolean alugado, String categoria, int numPortas) {
-        super(marca, modelo, ano, placa, alugado, categoria);
+    
+    public Carro(String placa, String fabricante, String modelo, int ano, int numPortas) {
+        super(placa, fabricante, modelo, ano);
         this.numPortas = numPortas;
     }
-
-    public int getnumPortas() {
+    
+    public int getNumPortas() {
         return numPortas;
     }
-
-    public void setnumPortas(int numPortas) {
-        this.numPortas = numPortas;
-    }
-
+    
     @Override
     public String toString() {
-        return super.toString() +", " + numPortas + " portas";
+        return super.toString() + " - " + numPortas + " portas";
     }
 }
