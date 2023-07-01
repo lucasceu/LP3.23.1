@@ -1,34 +1,55 @@
-abstract class Veiculo {
+class Veiculo {
     private String placa;
-    private String fabricante;
+    private String marca;
     private String modelo;
     private int ano;
-    
-    public Veiculo(String placa, String fabricante, String modelo, int ano) {
+    private Cliente cliente; // Novo atributo cliente
+
+    public Veiculo(String placa, String marca, String modelo, int ano) {
         this.placa = placa;
-        this.fabricante = fabricante;
+        this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
+        this.cliente = null; // Inicialmente nenhum cliente alugou o veículo
     }
-    
+
     public String getPlaca() {
         return placa;
     }
-    
-    public String getFabricante() {
-        return fabricante;
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
-    
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
     public String getModelo() {
         return modelo;
     }
-    
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
     public int getAno() {
         return ano;
     }
-    
-    @Override
-    public String toString() {
-        return fabricante + " " + modelo + " (" + placa + ")";
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

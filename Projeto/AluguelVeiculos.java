@@ -21,81 +21,95 @@ public class AluguelVeiculos {
         clientes.add(cliente);
     }
 
-    public void mostrarVeiculosDisponiveis() {
-        System.out.println("Veículos disponíveis para aluguel:");
-        for (Veiculo veiculo : veiculosDisponiveis) {
-            System.out.println(veiculo);
-        }
-    }
-
     public void mostrarVeiculosPorTipo(String tipo) {
-        System.out.println("Veículos disponíveis do tipo " + tipo + ":");
+        System.out.println("----- VEÍCULOS DISPONÍVEIS (" + tipo + ") -----");
         for (Veiculo veiculo : veiculosDisponiveis) {
-            if (veiculo.getClass().getSimpleName().equals(tipo)) {
-                System.out.println(veiculo);
+            if (veiculo instanceof Carro && tipo.equalsIgnoreCase("Carro")) {
+                Carro carro = (Carro) veiculo;
+                System.out.println("Placa: " + carro.getPlaca() + ", Marca: " + carro.getMarca() + ", Modelo: " +
+                        carro.getModelo() + ", Ano: " + carro.getAno() + ", Número de Portas: " +
+                        carro.getNumPortas());
+            } else if (veiculo instanceof Moto && tipo.equalsIgnoreCase("Moto")) {
+                Moto moto = (Moto) veiculo;
+                System.out.println("Placa: " + moto.getPlaca() + ", Marca: " + moto.getMarca() + ", Modelo: " +
+                        moto.getModelo() + ", Ano: " + moto.getAno() + ", Cilindradas: " +
+                        moto.getCilindradas());
             }
         }
+        System.out.println("---------------------------------------------");
     }
 
     public void realizarAluguel(String cpf, String placa) {
-        Cliente cliente = buscarCliente(cpf);
+        Cliente cliente = null;
+        Veiculo veiculoAlugado = null;
+
+        for (Cliente c : clientes) {
+            if (c.getCpf().equals(cpf)) {
+                cliente = c;
+                break;
+            }
+        }
+
         if (cliente == null) {
             System.out.println("Cliente não encontrado.");
             return;
         }
 
-        Veiculo veiculo = buscarVeiculo(placa);
-        if (veiculo == null) {
+        for (Veiculo veiculo : veiculosDisponiveis) {
+            if (veiculo.getPlaca().equalsIgnoreCase(placa)) {
+                veiculoAlugado = veiculo;
+                break;
+            }
+        }
+
+        if (veiculoAlugado == null) {
+            System.out.println("Veículo não encontrado ou indisponível para aluguel.");
+            return;
+        }
+
+        veiculosDisponiveis.remove(veiculoAlugado);
+        veiculoAlugado.setCliente(cliente);
+        veiculosAlugados.add(veiculoAlugado);
+
+        System.out.println("Veículo alugado com sucesso!");
+        System.out.println("Cliente: " + cliente.getNome());
+        System.out.println("Veículo: " + veiculoAlugado.getMarca() + " " + veiculoAlugado.getModelo());
+    }
+
+    public void realizarDevolucao(String placa) {
+        Veiculo veiculoDevolvido = null;
+
+        for (Veiculo veiculo : veiculosAlugados) {
+            if (veiculo.getPlaca().equalsIgnoreCase(placa)) {
+                veiculoDevolvido = veiculo;
+                break;
+            }
+        }
+
+        if (veiculoDevolvido == null) {
             System.out.println("Veículo não encontrado.");
             return;
         }
 
-        Aluguel aluguel = new Aluguel(cliente, veiculo);
-        veiculosDisponiveis.remove(veiculo);
-        veiculosAlugados.add(veiculo);
+        veiculosAlugados.remove(veiculoDevolvido);
+        veiculoDevolvido.setCliente(null);
+        veiculosDisponiveis.add(veiculoDevolvido);
 
-        System.out.println("\nAluguel realizado:");
-        System.out.println(aluguel);
+        System.out.println("Veículo devolvido com sucesso!");
+        System.out.println("Veículo: " + veiculoDevolvido.getMarca() + " " + veiculoDevolvido.getModelo());
     }
 
-    public void realizarDevolucao(String placa) {
-        Veiculo veiculo = buscarVeiculoAlugado(placa);
-        if (veiculo == null) {
-            System.out.println("Veículo não encontrado ou não está alugado.");
-            return;
-        }
-
-        veiculosDisponiveis.add(veiculo);
-        veiculosAlugados.remove(veiculo);
-
-        System.out.println("\nDevolução realizada com sucesso.");
+    public List<Veiculo> getVeiculosAlugados() {
+        return veiculosAlugados;
     }
 
-    public Cliente buscarCliente(String cpf) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getCpf().equals(cpf)) {
-                return cliente;
-            }
-        }
-        return null;
-    }
-
-    public Veiculo buscarVeiculo(String placa) {
-        for (Veiculo veiculo : veiculosDisponiveis) {
-            if (veiculo.getPlaca().equals(placa)) {
-                return veiculo;
-            }
-        }
-        return null;
-    }
-
-    public Veiculo buscarVeiculoAlugado(String placa) {
+    public static boolean clientePossuiVeiculoAlugado(String cpf, List<Veiculo> veiculosAlugados) {
         for (Veiculo veiculo : veiculosAlugados) {
-            if (veiculo.getPlaca().equals(placa)) {
-                return veiculo;
+            if (veiculo.getCliente().getCpf().equals(cpf)) {
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     public static void main(String[] args) {
@@ -103,34 +117,24 @@ public class AluguelVeiculos {
         Scanner scanner = new Scanner(System.in);
         int opcao = 0;
 
-        // Adicionar carros e motos disponíveis
-        Carro carro1 = new Carro("ABC1234", "Volkswagen", "Gol", 2019, 4);
-        Carro carro2 = new Carro("DEF5678", "Ford", "Fiesta", 2020, 5);
-        Carro carro3 = new Carro("GHI1234", "Toyota", "Corolla", 2021, 5);
-
-        Moto moto1 = new Moto("GHI9012", "Honda", "CB300", 2021, 300);
-        Moto moto2 = new Moto("JKL3456", "Yamaha", "MT-07", 2022, 700);
-        Moto moto3 = new Moto("KLM7891", "BMW", "S 1000 RR", 2023, 1000);
+        Carro carro1 = new Carro("ABC1234", "Fiat", "Uno", 2020, 4);
+        Carro carro2 = new Carro("DEF5678", "Volkswagen", "Gol", 2018, 4);
+        Moto moto1 = new Moto("GHI9012", "Honda", "CG 125", 2019, 125);
+        Moto moto2 = new Moto("JKL3456", "Yamaha", "YZF R3", 2021, 300);
 
         programa.adicionarVeiculo(carro1);
         programa.adicionarVeiculo(carro2);
-        programa.adicionarVeiculo(carro3);
         programa.adicionarVeiculo(moto1);
         programa.adicionarVeiculo(moto2);
-        programa.adicionarVeiculo(moto3);
 
-
-        // Adicionar clientes
         Cliente cliente1 = new Cliente("João", "123456789");
         Cliente cliente2 = new Cliente("Maria", "987654321");
-        Cliente cliente3 = new Cliente("José", "567891234");
 
         programa.adicionarCliente(cliente1);
         programa.adicionarCliente(cliente2);
-        programa.adicionarCliente(cliente3);
 
-        while (opcao != 5) {
-            System.out.println("\n----- MENU -----");
+        while (opcao != 4) {
+            System.out.println("----- MENU -----");
             System.out.println("1. Listar veículos disponíveis por tipo");
             System.out.println("2. Alugar veículo");
             System.out.println("3. Devolver veículo");
@@ -142,42 +146,30 @@ public class AluguelVeiculos {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("----- TIPOS DE VEÍCULOS -----");
-                    System.out.println("1. Carro");
-                    System.out.println("2. Moto");
-                    System.out.println("-----------------------------");
-                    System.out.print("Digite o tipo de veículo desejado: ");
-                    int tipoVeiculo = scanner.nextInt();
-                    scanner.nextLine(); // Limpar o buffer de leitura
-
-                    if (tipoVeiculo == 1) {
-                        programa.mostrarVeiculosPorTipo("Carro");
-                    } else if (tipoVeiculo == 2) {
-                        programa.mostrarVeiculosPorTipo("Moto");
-                    } else {
-                        System.out.println("Opção inválida.");
-                    }
-
+                    System.out.println("Digite o tipo de veículo (Carro/Moto): ");
+                    String tipo = scanner.nextLine();
+                    programa.mostrarVeiculosPorTipo(tipo);
                     break;
                 case 2:
                     System.out.print("Digite o CPF do cliente: ");
                     String cpf = scanner.nextLine();
 
-                    System.out.print("Digite a placa do veículo que deseja alugar: ");
-                    String placaAluguel = scanner.nextLine();
+                    if (clientePossuiVeiculoAlugado(cpf, programa.getVeiculosAlugados())) {
+                        System.out.println("O cliente já possui um veículo alugado.");
+                    } else {
+                        System.out.print("Digite a placa do veículo que deseja alugar: ");
+                        String placaAluguel = scanner.nextLine();
 
-                    programa.realizarAluguel(cpf, placaAluguel);
-
+                        programa.realizarAluguel(cpf, placaAluguel);
+                    }
                     break;
                 case 3:
                     System.out.print("Digite a placa do veículo que deseja devolver: ");
                     String placaDevolucao = scanner.nextLine();
-
                     programa.realizarDevolucao(placaDevolucao);
-
                     break;
                 case 4:
-                    System.out.println("Encerrando programa...");
+                    System.out.println("Saindo do programa...");
                     break;
                 default:
                     System.out.println("Opção inválida.");
