@@ -3,8 +3,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AluguelVeiculos {
-    private List<Veiculo> veiculosDisponiveis;
-    private List<Veiculo> veiculosAlugados;
+    private List<VeiculoAbstrato> veiculosDisponiveis;
+    private List<VeiculoAbstrato> veiculosAlugados;
     private List<Cliente> clientes;
 
     public AluguelVeiculos() {
@@ -13,7 +13,7 @@ public class AluguelVeiculos {
         clientes = new ArrayList<>();
     }
 
-    public void adicionarVeiculo(Veiculo veiculo) {
+    public void adicionarVeiculo(VeiculoAbstrato veiculo) {
         veiculosDisponiveis.add(veiculo);
     }
 
@@ -23,17 +23,10 @@ public class AluguelVeiculos {
 
     public void mostrarVeiculosPorTipo(String tipo) {
         System.out.println("----- VEÍCULOS DISPONÍVEIS (" + tipo + ") -----");
-        for (Veiculo veiculo : veiculosDisponiveis) {
-            if (veiculo instanceof Carro && tipo.equalsIgnoreCase("Carro")) {
-                Carro carro = (Carro) veiculo;
-                System.out.println("Placa: " + carro.getPlaca() + ", Marca: " + carro.getMarca() + ", Modelo: " +
-                        carro.getModelo() + ", Ano: " + carro.getAno() + ", Número de Portas: " +
-                        carro.getNumPortas());
-            } else if (veiculo instanceof Moto && tipo.equalsIgnoreCase("Moto")) {
-                Moto moto = (Moto) veiculo;
-                System.out.println("Placa: " + moto.getPlaca() + ", Marca: " + moto.getMarca() + ", Modelo: " +
-                        moto.getModelo() + ", Ano: " + moto.getAno() + ", Cilindradas: " +
-                        moto.getCilindradas());
+        for (VeiculoAbstrato veiculo : veiculosDisponiveis) {
+            if ((veiculo instanceof Carro && tipo.equalsIgnoreCase("Carro")) ||
+                    (veiculo instanceof Moto && tipo.equalsIgnoreCase("Moto"))) {
+                veiculo.exibirDetalhes();
             }
         }
         System.out.println("---------------------------------------------");
@@ -41,7 +34,7 @@ public class AluguelVeiculos {
 
     public void realizarAluguel(String cpf, String placa) {
         Cliente cliente = null;
-        Veiculo veiculoAlugado = null;
+        VeiculoAbstrato veiculoAlugado = null;
 
         for (Cliente c : clientes) {
             if (c.getCpf().equals(cpf)) {
@@ -55,7 +48,7 @@ public class AluguelVeiculos {
             return;
         }
 
-        for (Veiculo veiculo : veiculosDisponiveis) {
+        for (VeiculoAbstrato veiculo : veiculosDisponiveis) {
             if (veiculo.getPlaca().equalsIgnoreCase(placa)) {
                 veiculoAlugado = veiculo;
                 break;
@@ -77,9 +70,9 @@ public class AluguelVeiculos {
     }
 
     public void realizarDevolucao(String placa) {
-        Veiculo veiculoDevolvido = null;
+        VeiculoAbstrato veiculoDevolvido = null;
 
-        for (Veiculo veiculo : veiculosAlugados) {
+        for (VeiculoAbstrato veiculo : veiculosAlugados) {
             if (veiculo.getPlaca().equalsIgnoreCase(placa)) {
                 veiculoDevolvido = veiculo;
                 break;
@@ -99,12 +92,12 @@ public class AluguelVeiculos {
         System.out.println("Veículo: " + veiculoDevolvido.getMarca() + " " + veiculoDevolvido.getModelo());
     }
 
-    public List<Veiculo> getVeiculosAlugados() {
+    public List<VeiculoAbstrato> getVeiculosAlugados() {
         return veiculosAlugados;
     }
 
-    public static boolean clientePossuiVeiculoAlugado(String cpf, List<Veiculo> veiculosAlugados) {
-        for (Veiculo veiculo : veiculosAlugados) {
+    public static boolean clientePossuiVeiculoAlugado(String cpf, List<VeiculoAbstrato> veiculosAlugados) {
+        for (VeiculoAbstrato veiculo : veiculosAlugados) {
             if (veiculo.getCliente().getCpf().equals(cpf)) {
                 return true;
             }
@@ -133,7 +126,7 @@ public class AluguelVeiculos {
 
         Cliente cliente1 = new Cliente("João", "123456789");
         Cliente cliente2 = new Cliente("Maria", "987654321");
-         Cliente cliente3 = new Cliente("José", "456789123");
+        Cliente cliente3 = new Cliente("José", "456789123");
 
         programa.adicionarCliente(cliente1);
         programa.adicionarCliente(cliente2);

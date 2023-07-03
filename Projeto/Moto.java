@@ -1,4 +1,4 @@
-class Moto extends Veiculo {
+class Moto extends VeiculoAbstrato {
     private int cilindradas;
 
     public Moto(String placa, String marca, String modelo, int ano, int cilindradas) {
@@ -12,5 +12,12 @@ class Moto extends Veiculo {
 
     public void setCilindradas(int cilindradas) {
         this.cilindradas = cilindradas;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("Placa: " + getPlaca() + ", Marca: " + getMarca() + ", Modelo: " +
+                getModelo() + ", Ano: " + getAno() + ", Cilindradas: " +
+                getCilindradas());
     }
 }

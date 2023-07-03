@@ -1,11 +1,11 @@
-class Veiculo {
+abstract class VeiculoAbstrato {
     private String placa;
     private String marca;
     private String modelo;
     private int ano;
-    private Cliente cliente; // Novo atributo cliente
+    private Cliente cliente;
 
-    public Veiculo(String placa, String marca, String modelo, int ano) {
+    public VeiculoAbstrato(String placa, String marca, String modelo, int ano) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
@@ -52,4 +52,6 @@ class Veiculo {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public abstract void exibirDetalhes();
 }

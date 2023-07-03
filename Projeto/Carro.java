@@ -1,4 +1,4 @@
-class Carro extends Veiculo {
+class Carro extends VeiculoAbstrato {
     private int numPortas;
 
     public Carro(String placa, String marca, String modelo, int ano, int numPortas) {
@@ -12,5 +12,12 @@ class Carro extends Veiculo {
 
     public void setNumPortas(int numPortas) {
         this.numPortas = numPortas;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("Placa: " + getPlaca() + ", Marca: " + getMarca() + ", Modelo: " +
+                getModelo() + ", Ano: " + getAno() + ", Número de Portas: " +
+                getNumPortas());
     }
 }
