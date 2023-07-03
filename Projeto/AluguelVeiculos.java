@@ -117,21 +117,27 @@ public class AluguelVeiculos {
         Scanner scanner = new Scanner(System.in);
         int opcao = 0;
 
-        Carro carro1 = new Carro("ABC1234", "Fiat", "Uno", 2020, 4);
+        Carro carro1 = new Carro("ABC1234", "Fiat", "Uno", 2015, 2);
         Carro carro2 = new Carro("DEF5678", "Volkswagen", "Gol", 2018, 4);
+        Carro carro3 = new Carro("GHI1234", "Toyota", "Corolla", 2021, 4);
         Moto moto1 = new Moto("GHI9012", "Honda", "CG 125", 2019, 125);
         Moto moto2 = new Moto("JKL3456", "Yamaha", "YZF R3", 2021, 300);
+        Moto moto3 = new Moto("KLM7891", "BMW", "S 1000 RR", 2023, 1000);
 
         programa.adicionarVeiculo(carro1);
         programa.adicionarVeiculo(carro2);
+        programa.adicionarVeiculo(carro3);
         programa.adicionarVeiculo(moto1);
         programa.adicionarVeiculo(moto2);
+        programa.adicionarVeiculo(moto3);
 
         Cliente cliente1 = new Cliente("João", "123456789");
         Cliente cliente2 = new Cliente("Maria", "987654321");
+         Cliente cliente3 = new Cliente("José", "456789123");
 
         programa.adicionarCliente(cliente1);
         programa.adicionarCliente(cliente2);
+        programa.adicionarCliente(cliente3);
 
         while (opcao != 4) {
             System.out.println("----- MENU -----");
