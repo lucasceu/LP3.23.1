@@ -1,4 +1,4 @@
-abstract class VeiculoAbstrato {
+abstract class VeiculoAbstrato { // Classe abstrata
     private String placa;
     private String marca;
     private String modelo;
@@ -13,7 +13,7 @@ abstract class VeiculoAbstrato {
         this.cliente = null; // Inicialmente nenhum cliente alugou o veículo
     }
 
-    public String getPlaca() {
+    public String getPlaca() { 
         return placa;
     }
 

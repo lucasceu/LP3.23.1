@@ -2,7 +2,7 @@ class Carro extends VeiculoAbstrato {
     private int numPortas;
 
     public Carro(String placa, String marca, String modelo, int ano, int numPortas) {
-        super(placa, marca, modelo, ano);
+        super(placa, marca, modelo, ano); // Chama o construtor da classe VeiculoAbstrato
         this.numPortas = numPortas;
     }
 
@@ -15,7 +15,7 @@ class Carro extends VeiculoAbstrato {
     }
 
     @Override
-    public void exibirDetalhes() {
+    public void exibirDetalhes() { // Implementa o método abstrato exibirDetalhes
         System.out.println("Placa: " + getPlaca() + ", Marca: " + getMarca() + ", Modelo: " +
                 getModelo() + ", Ano: " + getAno() + ", Número de Portas: " +
                 getNumPortas());
